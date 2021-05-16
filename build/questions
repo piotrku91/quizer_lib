@@ -1,0 +1,29 @@
+
+question <$$ "Czy lubisz mnie?" $$>
+  {
+$$ Answer: "tak"$
+$$ Answer: "nio"$
+$$ Answer: "niewiem"$
+$$ Answer: "chyba"$
+$$ Correct: "4"$
+  };
+  /* DESCRIPTION: 
+  Jest tak dlatego poniewaz
+  END */
+
+
+  // komentrarz
+question <$$ "Czy masz psa?" $$>
+  {
+$$ Answer: "tak";
+$$ Answer: "nio6";
+$$ Answer: "no";
+$$ Answer: "chyba";
+$$ Correct: "2"
+  };
+  /* DESCRIPTION: 
+  Jest tak dlatego poniewaz sram
+  END */
+
+
+

@@ -1,62 +1,46 @@
+#pragma once
 #include <string>
+#include <stack>
 
-class BraceGuard
+class braceguard
 {
 private:
-int m_Count_left;
-int m_Count_right;
-std::string m_OpenStr;
-std::string m_CloseStr;
-
-void openB() 
-{
-m_Count_left++;
-};
-
-void closeB()
-{
-m_Count_right++;
-};
+    char m_OpenStr;
+    char m_CloseStr;
 
 public:
-int getCount() const
-{
-  return m_Count_right-m_Count_left;
-};
+    std::stack<char> S;
+    bool Analizer(const std::string& lines)
+    {
 
-bool isSymetric()
-{
-return m_Count_right==m_Count_left;
-};
+        for (auto it = lines.begin(); it != lines.end(); it++)
+        {
+            if (static_cast<char>(*it) == m_OpenStr)
+            {
+                S.push(*it);
+            }
+            else if (static_cast<char>(*it) == m_CloseStr)
+            {
+                if ((S.empty()) || (S.top() == *it))
+                {
+                    return false;
+                }
+                else
+                {
+                    S.pop();
+                };
+            };
+        };
 
-void Analize(std::string line)
-{
+        return (S.empty() ? true : false);
+    }
 
-int pos=line.find(m_OpenStr);
+    void reset()
+    {
+        while (!S.empty()) {S.pop();};
+    };
 
-while (pos!=std::string::npos)
-{
-openB();
-pos=line.find(m_OpenStr,pos+1);
-};
 
-pos=line.find(m_CloseStr);
-
-while (pos!=std::string::npos)
-{
-
-closeB();
-pos=line.find(m_CloseStr,pos+1);
-};
-
-};
-
-void reset() 
-{
-m_Count_left=0;
-m_Count_right=0;
-};
-
-BraceGuard(const std::string& openstring, const std::string& closestring):m_OpenStr{openstring},m_CloseStr{closestring} {reset();};
-
+    braceguard() : m_OpenStr{'{'}, m_CloseStr{'}'}{};
+    ~braceguard(){};
 };
